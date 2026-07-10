@@ -1,4 +1,12 @@
-# EventSphere — Event Management System
+# EventSphere | Full-Stack Event Management Platform
+
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3.5-brightgreen)
+![React](https://img.shields.io/badge/React-19-blue)
+![MySQL](https://img.shields.io/badge/MySQL-8-blue)
+![JWT](https://img.shields.io/badge/Auth-JWT-success)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
 
 A full-stack event management platform where **Organizers** create and manage events, and **Attendees** browse, search, and register for events. Built with Spring Boot, JWT security, and a React single-page application.
 
