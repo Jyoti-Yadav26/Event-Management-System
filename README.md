@@ -514,7 +514,7 @@ Use these as starting points — customize with your metrics:
 
 ## Author
 
-**Jyoti Rai**
+**Jyoti Yadav**
 
 ---
 
