@@ -107,7 +107,8 @@ Event_Management_system/
 │   └── util/                # ApiResponseUtil
 ├── src/main/resources/
 │   ├── application.properties
-│   ├── application-example.properties├── frontend/
+│   ├── application-example.properties
+├── frontend/
 │   ├── src/
 │   │   ├── api/             # axios.js, authApi, eventApi, registrationApi
 │   │   ├── components/
@@ -166,6 +167,7 @@ Alternatively, set environment variables:
 | `JWT_SECRET` | JWT signing key (min 32 chars) |
 | `DB_USERNAME` | MySQL username (optional, default: `root`) |
 | `DB_URL` | JDBC URL (optional) |
+
 **Run the backend:**
 ```bash
 mvn spring-boot:run
@@ -223,6 +225,7 @@ The app opens at **`http://localhost:5173`**.
 | `app.cors.allowed-origins` | Allowed frontend origin(s) |
 
 > See `application-example.properties` for the full local configuration template.
+
 ---
 
 ## API Endpoints

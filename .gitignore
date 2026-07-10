@@ -23,4 +23,6 @@ Thumbs.db
 
 # Environment / secrets
 .env
+frontend/.env
 application-local.properties
+**/application-local.properties

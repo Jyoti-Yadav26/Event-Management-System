@@ -6,11 +6,13 @@ import com.jyoti.eventmanagement.entity.Event;
 import com.jyoti.eventmanagement.entity.User;
 import com.jyoti.eventmanagement.entity.enums.EventCategory;
 import com.jyoti.eventmanagement.exception.DuplicateEventException;
+import com.jyoti.eventmanagement.exception.EventHasRegistrationsException;
 import com.jyoti.eventmanagement.exception.InvalidEventDateException;
 import com.jyoti.eventmanagement.exception.InvalidSeatCountException;
 import com.jyoti.eventmanagement.exception.ResourceNotFoundException;
 import com.jyoti.eventmanagement.exception.UnauthorizedAccessException;
 import com.jyoti.eventmanagement.repository.EventRepository;
+import com.jyoti.eventmanagement.repository.RegistrationRepository;
 import com.jyoti.eventmanagement.security.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,6 +27,7 @@ import java.time.LocalDate;
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final RegistrationRepository registrationRepository;
     private final EventMapper eventMapper;
     private final SecurityUtils securityUtils;
 
@@ -77,6 +80,7 @@ public class EventService {
         User currentUser = securityUtils.getCurrentUser();
         Event event = findEventById(id);
         verifyOwnership(event, currentUser);
+        validateNoActiveRegistrations(event);
         eventRepository.delete(event);
     }
 
@@ -104,6 +108,15 @@ public class EventService {
     private void verifyOwnership(Event event, User currentUser) {
         if (!event.getOrganizer().getId().equals(currentUser.getId())) {
             throw new UnauthorizedAccessException("You are not authorized to modify this event");
+        }
+    }
+
+    private void validateNoActiveRegistrations(Event event) {
+        long registrationCount = registrationRepository.countByEvent(event);
+        if (registrationCount > 0) {
+            throw new EventHasRegistrationsException(
+                    "Cannot delete event — " + registrationCount + " active registration(s) exist. "
+                            + "Cancel registrations or wait until attendees withdraw before deleting.");
         }
     }
 
