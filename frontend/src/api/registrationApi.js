@@ -1,7 +1,16 @@
-export const registrationApi = {
-  register: () => Promise.resolve(),
-  cancel: () => Promise.resolve(),
-  getMyRegistrations: () => Promise.resolve(),
+import axiosInstance from "./axios";
+
+export const registerForEvent = async (eventId) => {
+  const response = await axiosInstance.post(`/registrations/${eventId}`);
+  return response.data;
 };
 
-export default registrationApi;
+export const cancelRegistration = async (eventId) => {
+  const response = await axiosInstance.delete(`/registrations/${eventId}`);
+  return response.data;
+};
+
+export const getMyRegistrations = async () => {
+  const response = await axiosInstance.get("/registrations/my");
+  return response.data;
+};
