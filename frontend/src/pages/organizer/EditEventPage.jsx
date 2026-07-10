@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { AlertCircle, Loader2, PencilLine } from 'lucide-react';
+import { AlertCircle, PencilLine } from 'lucide-react';
 import EventForm from '../../components/events/EventForm';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { getEventById, updateEvent } from '../../api/eventApi';
 
 const toFormTime = (time) => {
@@ -68,12 +69,7 @@ const EditEventPage = () => {
   };
 
   if (loading) {
-    return (
-      <div className="flex flex-col items-center gap-3 py-24 text-[#6B7280]">
-        <Loader2 size={24} strokeWidth={1.75} className="animate-spin" />
-        <span className="text-sm">Loading event...</span>
-      </div>
-    );
+    return <LoadingSpinner message="Loading event..." />;
   }
 
   if (!initialValues) {

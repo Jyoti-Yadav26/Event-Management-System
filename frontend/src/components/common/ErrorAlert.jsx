@@ -1,13 +1,23 @@
-const ErrorAlert = ({ message, fieldErrors }) => {
+import { AlertCircle } from 'lucide-react';
+
+const ErrorAlert = ({ message, fieldErrors, className = '' }) => {
   if (!message && !fieldErrors) {
     return null;
   }
 
   return (
-    <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-      {message && <p>{message}</p>}
+    <div
+      className={`flex flex-col gap-2 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-600 ${className}`}
+      role="alert"
+    >
+      {message && (
+        <div className="flex items-center gap-2">
+          <AlertCircle size={16} strokeWidth={1.75} className="shrink-0" />
+          <span>{message}</span>
+        </div>
+      )}
       {fieldErrors && (
-        <ul className="mt-2 list-inside list-disc space-y-1">
+        <ul className="ml-6 list-disc space-y-1">
           {Object.entries(fieldErrors).map(([field, error]) => (
             <li key={field}>{error}</li>
           ))}

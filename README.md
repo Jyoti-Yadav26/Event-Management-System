@@ -7,7 +7,6 @@
 ![JWT](https://img.shields.io/badge/Auth-JWT-success)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-
 A full-stack event management platform where **Organizers** create and manage events, and **Attendees** browse, search, and register for events. Built with Spring Boot, JWT security, and a React single-page application.
 
 > **Live demo (local):** Frontend `http://localhost:5173` · Backend `http://localhost:8090/api/v1` · Swagger `http://localhost:8090/api/v1/swagger-ui.html`
@@ -108,8 +107,7 @@ Event_Management_system/
 │   └── util/                # ApiResponseUtil
 ├── src/main/resources/
 │   ├── application.properties
-│   ├── application-example.properties
-├── frontend/
+│   ├── application-example.properties├── frontend/
 │   ├── src/
 │   │   ├── api/             # axios.js, authApi, eventApi, registrationApi
 │   │   ├── components/
@@ -168,7 +166,6 @@ Alternatively, set environment variables:
 | `JWT_SECRET` | JWT signing key (min 32 chars) |
 | `DB_USERNAME` | MySQL username (optional, default: `root`) |
 | `DB_URL` | JDBC URL (optional) |
-
 **Run the backend:**
 ```bash
 mvn spring-boot:run
@@ -226,7 +223,6 @@ The app opens at **`http://localhost:5173`**.
 | `app.cors.allowed-origins` | Allowed frontend origin(s) |
 
 > See `application-example.properties` for the full local configuration template.
-
 ---
 
 ## API Endpoints

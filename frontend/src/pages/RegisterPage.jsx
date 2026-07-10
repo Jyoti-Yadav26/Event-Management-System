@@ -17,9 +17,13 @@ const RegisterPage = () => {
     setLoading(true);
 
     try {
-      await registerApi(formData);
-      setSuccess(true);
-      setTimeout(() => navigate("/login"), 1500);
+      const response = await registerApi(formData);
+      if (response.success) {
+        setSuccess(true);
+        setTimeout(() => navigate("/login"), 1500);
+        return;
+      }
+      setError(response.message || "Something went wrong while creating your account.");
     } catch (err) {
       setError(
         err.response?.data?.message ||

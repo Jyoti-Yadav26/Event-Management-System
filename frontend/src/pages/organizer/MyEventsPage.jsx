@@ -14,27 +14,8 @@ import {
   CalendarX,
 } from 'lucide-react';
 import { getMyEvents, deleteEvent } from '../../api/eventApi';
-
-const formatDate = (date) => {
-  if (!date) return '';
-  return new Date(date).toLocaleDateString('en-IN', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-};
-
-const formatTime = (time) => {
-  if (!time) return '';
-  const [hours, minutes] = time.split(':');
-  const value = new Date();
-  value.setHours(Number(hours), Number(minutes));
-  return value.toLocaleTimeString('en-IN', {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-  });
-};
+import LoadingSpinner from '../../components/common/LoadingSpinner';
+import { formatDate, formatTime } from '../../utils/helpers';
 
 const MyEventsPage = () => {
   const [events, setEvents] = useState([]);
@@ -101,7 +82,7 @@ const MyEventsPage = () => {
 
         <button
           type="button"
-          onClick={() => navigate('/organizer/events/new')}
+          onClick={() => navigate('/organizer/create')}
           className="flex items-center gap-2 rounded-full bg-[#1F1F1F] px-6 py-3.5 text-sm font-medium text-[#F8F7F5] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
         >
           <Plus size={16} strokeWidth={2} />
@@ -121,10 +102,7 @@ const MyEventsPage = () => {
       )}
 
       {loading ? (
-        <div className="flex flex-col items-center gap-3 py-24 text-[#6B7280]">
-          <Loader2 size={24} strokeWidth={1.75} className="animate-spin" />
-          <span className="text-sm">Loading your events...</span>
-        </div>
+        <LoadingSpinner message="Loading your events..." />
       ) : events.length === 0 ? (
         <div className="flex flex-col items-center gap-6 rounded-3xl bg-white px-8 py-24 text-center shadow-[0_2px_12px_rgba(31,31,31,0.06)]">
           <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F8F7F5]">
@@ -139,7 +117,7 @@ const MyEventsPage = () => {
             </p>
           </div>
           <Link
-            to="/organizer/events/new"
+            to="/organizer/create"
             className="flex items-center gap-2 rounded-full bg-[#1F1F1F] px-6 py-3 text-sm font-medium text-[#F8F7F5] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
           >
             <Plus size={16} strokeWidth={2} />
@@ -193,7 +171,7 @@ const MyEventsPage = () => {
                   <div className="mt-2 flex items-center gap-3 border-t border-[#E8E3DD] pt-4">
                     <button
                       type="button"
-                      onClick={() => navigate(`/organizer/events/${event.id}/edit`)}
+                      onClick={() => navigate(`/organizer/edit/${event.id}`)}
                       className="flex flex-1 items-center justify-center gap-2 rounded-full border border-[#E8E3DD] bg-white px-4 py-2.5 text-sm font-medium text-[#1F1F1F] transition-all duration-300 hover:border-[#1F1F1F]"
                     >
                       <Pencil size={14} strokeWidth={1.75} />

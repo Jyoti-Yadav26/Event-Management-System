@@ -59,8 +59,8 @@ const RegisterForm = ({ onSubmit, loading }) => {
     e.preventDefault();
     if (!validate()) return;
 
-    const { confirmPassword, ...payload } = formData;
-    onSubmit(payload);
+    const { confirmPassword, fullName, ...rest } = formData;
+    onSubmit({ ...rest, name: fullName.trim() });
   };
 
   return (
