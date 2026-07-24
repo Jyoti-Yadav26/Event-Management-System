@@ -13,20 +13,25 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (formData) => {
-    setError('');
-    setLoading(true);
-    try {
-      const authData = await loginApi(formData);
-      login(authData);
+  setError('');
+  setLoading(true);
+  try {
+    const response = await loginApi(formData);
+    if (response.success) {
+      const { token, email, name, role } = response.data;
+      login({ token, user: { email, name, role } });
       navigate('/');
-    } catch (err) {
-      setError(
-        err?.response?.data?.message || 'Login failed. Check your credentials.'
-      );
-    } finally {
-      setLoading(false);
+    } else {
+      setError(response.message || 'Login failed. Check your credentials.');
     }
-  };
+  } catch (err) {
+    setError(
+      err?.response?.data?.message || 'Login failed. Check your credentials.'
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="flex min-h-[70vh] items-center justify-center">
