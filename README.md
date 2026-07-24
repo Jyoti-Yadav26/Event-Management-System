@@ -430,40 +430,6 @@ erDiagram
 | `/organizer/edit/:id` | Organizer | Edit event |
 | `/attendee/my-registrations` | Attendee | My Registrations |
  
----
- 
-## Future Improvements
- 
-- [ ] Email notifications (registration confirmation, event reminders)
-- [ ] Organizer analytics dashboard (registrations per event, seat utilization)
-- [ ] Event image upload (S3 / Cloudinary)
-- [ ] Admin role for platform-wide moderation
-- [ ] Refresh tokens and token rotation
-- [ ] Unit & integration tests (JUnit, MockMvc, React Testing Library)
-- [ ] Docker Compose for one-command setup
-- [ ] CI/CD pipeline (GitHub Actions)
-- [ ] Deploy backend (Railway / Render)
-- [ ] Password reset via email OTP
-- [ ] Waitlist when events are full
----
- 
-## Recommended Screenshots for GitHub
- 
-Include these in a `docs/screenshots/` folder and link them in the README:
- 
-| # | Screenshot | Why it matters |
-|---|------------|----------------|
-| 1 | **Home page** with event grid, search, and filters | Shows public browsing UX |
-| 2 | **Event detail page** with register button | Demonstrates attendee flow |
-| 3 | **Organizer — My Events** dashboard | Shows CRUD management |
-| 4 | **Create / Edit Event** form | Highlights organizer capabilities |
-| 5 | **Attendee — My Registrations** | Shows registration management |
-| 6 | **Login / Register** pages | Auth UX |
-| 7 | **Navbar — role comparison** (3 crops: guest, organizer, attendee) | Proves RBAC in UI |
-| 8 | **Swagger UI** | Shows API documentation |
-| 9 | **Mobile responsive view** | Responsive design proof |
- 
-**Tip:** Use the same sample data across screenshots so the repo looks polished and consistent.
  
 ---
  
