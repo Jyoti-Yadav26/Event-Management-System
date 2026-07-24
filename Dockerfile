@@ -1,11 +1,13 @@
-# Use Java 17 as the base image
-FROM eclipse-temurin:17-jdk
+# Stage 1: build the jar from source
+FROM maven:3.9-eclipse-temurin-17 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the JAR from the target folder
-COPY target/event-management-system-1.0.0-SNAPSHOT.jar app.jar
-
-# Expose the application port
+# Stage 2: run the jar
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8090
-
-# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
