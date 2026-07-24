@@ -1,9 +1,33 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LogIn } from 'lucide-react';
 import LoginForm from '../components/auth/LoginForm';
+import { login as loginApi } from '../api/authApi';
+import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = async (formData) => {
+    setError('');
+    setLoading(true);
+    try {
+      const authData = await loginApi(formData);
+      login(authData);
+      navigate('/');
+    } catch (err) {
+      setError(
+        err?.response?.data?.message || 'Login failed. Check your credentials.'
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-[70vh] items-center justify-center">
       <motion.div
@@ -24,7 +48,11 @@ const LoginPage = () => {
           </p>
         </div>
 
-        <LoginForm />
+        {error && (
+          <p className="mb-4 text-center text-sm text-red-500">{error}</p>
+        )}
+
+        <LoginForm onSubmit={handleLogin} loading={loading} />
 
         <p className="mt-6 text-center text-sm text-[#6B7280]">
           New here?{' '}
